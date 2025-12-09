@@ -27,7 +27,8 @@ async function recupererCategories() {
     const categories = await response.json();
 
     console.log("Catégories récupérées!", categories);
-    
+
+    // Création et insertion des boutons de filtre pour chaque catégorie
     buttonTous = document.createElement("button");
     buttonTous.innerText = "Tous";
     document.querySelector(".filters").appendChild(buttonTous);
