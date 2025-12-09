@@ -20,3 +20,15 @@ async function recupererProjets() {
 }
 
 recupererProjets();
+
+// Appel de l'API pour récupérer les catégories des filtres
+async function recupererCategories() {
+    const response = await fetch("http://localhost:5678/api/categories")
+    const categories = await response.json();
+
+    console.log("Catégories récupérées!", categories);
+
+    
+}
+
+recupererCategories();
