@@ -11,9 +11,10 @@ async function recupererProjets() {
         const titreProjet = document.createElement("figcaption");
         titreProjet.innerText = projets[i].title;
 
-        ficheProjet.appendChild(imageProjet, titreProjet);
+        ficheProjet.appendChild(imageProjet);
+        ficheProjet.appendChild(titreProjet);
         document.querySelector(".gallery").appendChild(ficheProjet);
-        
+
         console.log("Projet ajouté!", imageProjet, titreProjet);
     }
 }
