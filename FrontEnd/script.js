@@ -27,8 +27,18 @@ async function recupererCategories() {
     const categories = await response.json();
 
     console.log("Catégories récupérées!", categories);
-
     
+    buttonTous = document.createElement("button");
+    buttonTous.innerText = "Tous";
+    document.querySelector(".filters").appendChild(buttonTous);
+
+    for (let i=0; i < categories.length; i++) {
+        const buttonFilter = document.createElement("button");
+        buttonFilter.innerText = categories[i].name;
+        document.querySelector(".filters").appendChild(buttonFilter);
+
+        console.log("Bouton de filtre ajouté!", buttonFilter);
+    }
 }
 
 recupererCategories();
