@@ -7,7 +7,7 @@ async function recupererProjets() {
     projets = await response.json(); //liste des projets
 
     console.log("Projets récupérés!", projets);
-
+    
     afficherProjets(projets); // Appel de la fonction pour afficher les projets
 }
 
@@ -59,8 +59,8 @@ function afficherCategories(categories) {
         filtersContainer.appendChild(buttonsFilter);
 
         console.log("Bouton de filtre ajouté!", buttonsFilter);
-        filtrerProjets(); // Appel de la fonction pour activer le filtrage des projets
     }
+    filtrerProjets(); // Appel de la fonction pour activer le filtrage des projets
 }
 
 
