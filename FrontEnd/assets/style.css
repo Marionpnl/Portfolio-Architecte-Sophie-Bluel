@@ -96,9 +96,16 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
-	color: #B1663C;
+nav a {
+	text-decoration: none;
+	color: #000000;
 }
+
+nav a:hover {
+	color: #B1663C;
+	cursor: pointer;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
