@@ -1,3 +1,8 @@
+/* Navigation */
+li a.active {
+    font-weight: 600;
+} 
+
 /* Login form */
 #login {
     margin-bottom: 300px;
