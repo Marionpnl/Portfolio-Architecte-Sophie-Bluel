@@ -1,8 +1,11 @@
 /* Login form */
+#login {
+    margin-bottom: 300px;
+}
+
 #login h2{
 	text-align: center;
-	margin-bottom: 40px;
-	
+	margin-bottom: 40px;	
 }
 
 #login form {
@@ -29,6 +32,7 @@ fieldset input{
 	border: none;
 	height: 35px;
 }
+
 #login p {
 	text-align: center;
 }
