@@ -81,6 +81,7 @@ function filtrerProjets() {
     })
 }
 
+
 recupererProjets(); // Appel de la fonction pour récupérer et afficher les projets
 
 recupererCategories(); // Appel de la fonction pour récupérer et afficher les boutons catégories
