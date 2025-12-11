@@ -1,5 +1,6 @@
+
 // Sauvegarde des entrées de login dans l'API
-async function sauvegarderLoginData (){
+async function saveLoginData (){
     const formulaireLogin = document.querySelector("form");
 
     formulaireLogin.addEventListener("submit", async (event) => {
@@ -21,32 +22,36 @@ async function sauvegarderLoginData (){
         // Traitement de la réponse de l'API au format JSON
         const data = await response.json();
 
-        // Vérification du statut de la réponse
-        if (response.ok) {
-            
-            const token = data.token; // Le token est dans "data" si le statut est ok
-
-            // Vérification que le token est présent dans "data"
-            if (token) {
-                // Si succès : Stockage du token dans le localStorage
-                window.localStorage.setItem("authToken", token);
-                console.log("Login réussi! Token stocké.", token);
-                
-                // Et redirection vers la page d'accueil
-                window.location.href = "index.html"; 
-            } else {
-                // Si échec: message d'erreur
-                console.error("Erreur du serveur: Token manquant dans la réponse.");
-                alert("Une erreur inattendue est survenue.");
-            }
-        
-        } else {
-            // Échec : Le serveur a renvoyé un statut d'erreur (ex: 401 Unauthorized)
-            console.error("Échec de la connexion. Statut:", response.status, "Message:", data.message);
-            // On affiche le message d'erreur renvoyé par le serveur
-            alert(data.message || "Erreur de connexion : E-mail ou mot de passe incorrect.");
-        }
+        handleResponse(response, data);
     })
 }
 
-sauvegarderLoginData();
+// Vérification du statut de la réponse
+function handleResponse(response, data) {
+    if (response.ok) {
+            
+        const token = data.token; // Le token est dans "data" si le statut est ok
+
+        // Vérification que le token est présent dans "data"
+        if (token) {
+            // Si succès : Stockage du token dans le localStorage
+            window.localStorage.setItem("authToken", token);
+            console.log("Login réussi! Token stocké.", token);
+                
+            // Et redirection vers la page d'accueil
+            window.location.href = "index.html"; 
+        } else {
+            // Si échec: message d'erreur
+            console.error("Erreur du serveur: Token manquant dans la réponse.");
+            alert("Une erreur inattendue est survenue.");
+        }
+        
+    } else {
+        // Échec : Le serveur a renvoyé un statut d'erreur (ex: 401 Unauthorized)
+        console.error("Échec de la connexion. Statut:", response.status, "Message:", data.message);
+        // On affiche le message d'erreur renvoyé par le serveur
+        alert(data.message || "Erreur de connexion : E-mail ou mot de passe incorrect.");
+    }
+}
+
+saveLoginData();
