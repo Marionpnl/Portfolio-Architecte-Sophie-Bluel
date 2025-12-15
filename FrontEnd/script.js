@@ -40,7 +40,14 @@ async function recupererCategories() {
 
     console.log("Catégories récupérées!", categories);
 
+    // Suppression des filtres
+    const filtersContainer = document.querySelector(".filters");
+    filtersContainer.innerHTML = ""; 
+
+    // Affichage des filtres seulement si l'utilisateur n'est pas logué
+    if (!token) {
     afficherCategories(categories); // Appel de la fonction pour afficher les catégories
+    }
 }
 
 // Création et insertion des boutons de filtre pour chaque catégorie
@@ -62,7 +69,6 @@ function afficherCategories(categories) {
     }
     filtrerProjets(); // Appel de la fonction pour activer le filtrage des projets
 }
-
 
 // Ajout de la fonctionnalité de filtre aux boutons
 function filtrerProjets() {
@@ -104,7 +110,7 @@ function modifierHomePagePourUtilisateurLogue() {
         modifyButton.classList.add("modify-button");
         modifyButton.innerHTML = `
             <i class="fa-regular fa-pen-to-square"></i>
-            <p>Modifier</p>
+            <p>modifier</p>
             `;
         const portfolioHeader = document.createElement("div");
         portfolioHeader.classList.add("header-portfolio");
@@ -115,13 +121,19 @@ function modifierHomePagePourUtilisateurLogue() {
         const portfolioSection = document.getElementById("portfolio");
         portfolioSection.prepend(portfolioHeader);
 
-        // Suppression des filtres
-        const filters = document.querySelector(".filters");
-        filters.innerHTML = ""; 
+        deconnecterUtilisateur(); // Appel de la fonction pour gérer la déconnexion
     } else {
         // L'utilisateur est "visiteur"
     }
 }
+
+function deconnecterUtilisateur() {
+    const loginElement = document.querySelector(".login");
+    loginElement.addEventListener("click", () => {
+        window.localStorage.removeItem("authToken");
+        window.location.href = "index.html";
+    })
+}       
 
 recupererProjets(); // Appel de la fonction pour récupérer et afficher les projets
 

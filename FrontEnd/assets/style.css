@@ -135,7 +135,7 @@ nav a:hover {
 }
 
 /* Portfolio */
-#portfolio h2 {
+#portfolio > h2 {
 	text-align: center;
 	margin-top: 4em;
 	margin-bottom: 1.5em;
@@ -235,3 +235,38 @@ footer nav li {
 	font-size: 14px;
 	font-weight: 300;
 }
+
+/* Home page - Edit mode */
+.edit-banner {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #000000;
+	height: 60px;
+	gap: 12px;
+}
+
+.edit-banner p,
+.edit-banner i {
+	color: white;
+	background-color: #000000;
+}
+
+.header-portfolio {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+}
+.header-portfolio h2 {
+	margin: 0;
+}
+.modify-button {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	border: none;
+	background-color: #FFFEF8;
+	font-family: "work sans";
+}
+
