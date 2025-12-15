@@ -81,26 +81,50 @@ function filtrerProjets() {
     })
 }
 
-const token = window.localStorage.getItem("authToken");
+function modifierHomePagePourUtilisateurLogue() {
+    const token = window.localStorage.getItem("authToken");
 
-if (token) {
+    if (token) {
     // L'utilisateur est "logué"
-    document.querySelector(".login").textContent = "logout";
-    
-    const banner = document.createElement("div");
-    banner.classList.add("edit-banner");
-    banner.innerHTML = `
-        <i class="fa-regular fa-pen-to-square"></i>
-        <p>Mode édition</p>
-        `;
-    const header = document.querySelector("header");
-    header.before(banner);
+        // Modification du bouton "login" en "logout"
+        document.querySelector(".login").textContent = "logout";
 
-} else {
-    // L'utilisateur est "visiteur"
+        // Ajout de la bannière 
+        const banner = document.createElement("div");
+        banner.classList.add("edit-banner");
+        banner.innerHTML = `
+            <i class="fa-regular fa-pen-to-square"></i>
+            <p>Mode édition</p>
+            `;
+        const header = document.querySelector("header");
+        header.before(banner);
+
+        // Ajout du bouton "modifier" 
+        const modifyButton = document.createElement("button");
+        modifyButton.classList.add("modify-button");
+        modifyButton.innerHTML = `
+            <i class="fa-regular fa-pen-to-square"></i>
+            <p>Modifier</p>
+            `;
+        const portfolioHeader = document.createElement("div");
+        portfolioHeader.classList.add("header-portfolio");
+   
+        const portfolioTitle = document.querySelector("#portfolio h2");
+        portfolioHeader.append(portfolioTitle, modifyButton);
+
+        const portfolioSection = document.getElementById("portfolio");
+        portfolioSection.prepend(portfolioHeader);
+
+        // Suppression des filtres
+        const filters = document.querySelector(".filters");
+        filters.innerHTML = ""; 
+    } else {
+        // L'utilisateur est "visiteur"
+    }
 }
-
 
 recupererProjets(); // Appel de la fonction pour récupérer et afficher les projets
 
 recupererCategories(); // Appel de la fonction pour récupérer et afficher les boutons catégories
+
+modifierHomePagePourUtilisateurLogue(); // Appel de la fonction pour modifier la page d'accueil si l'utilisateur est logué
