@@ -81,6 +81,25 @@ function filtrerProjets() {
     })
 }
 
+const token = window.localStorage.getItem("authToken");
+
+if (token) {
+    // L'utilisateur est "logué"
+    document.querySelector(".login").textContent = "logout";
+    
+    const banner = document.createElement("div");
+    banner.classList.add("edit-banner");
+    banner.innerHTML = `
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p>Mode édition</p>
+        `;
+    const header = document.querySelector("header");
+    header.before(banner);
+
+} else {
+    // L'utilisateur est "visiteur"
+}
+
 
 recupererProjets(); // Appel de la fonction pour récupérer et afficher les projets
 

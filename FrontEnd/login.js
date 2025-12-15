@@ -1,27 +1,24 @@
-
-// Sauvegarde des entrées de login dans l'API
+// Sauvegarde des données de login dans l'API
 async function saveLoginData (){
-    const formulaireLogin = document.querySelector("form");
+    const loginForm = document.querySelector("form");
 
-    formulaireLogin.addEventListener("submit", async (event) => {
-        event.preventDefault();
-        console.log("Il n'y a pas eu de rechargement de la page");
+    loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault(); 
         // Récupération des données du formulaire
         const loginData = {
             email: event.target.querySelector("#email").value,
             password: event.target.querySelector("#password").value
         };
         const chargeUtile = JSON.stringify(loginData);
-
         //Envoi des données à l'API
         const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json"},
+            headers: {"Content-Type": "application/json"},
             body: chargeUtile
         })
         // Traitement de la réponse de l'API au format JSON
         const data = await response.json();
-
+        // Appel de la fonction pour gérer la réponse:
         handleResponse(response, data);
     })
 }
@@ -50,7 +47,7 @@ function handleResponse(response, data) {
         // Échec : Le serveur a renvoyé un statut d'erreur (ex: 401 Unauthorized)
         console.error("Échec de la connexion. Statut:", response.status, "Message:", data.message);
         // On affiche le message d'erreur renvoyé par le serveur
-        alert(data.message || "Erreur de connexion : E-mail ou mot de passe incorrect.");
+        alert(data.message || "Erreur dans l'identifiant ou le mot de passe");
     }
 }
 
