@@ -177,7 +177,6 @@ nav a:hover {
 
 .gallery img {
 	width: 100%;
-
 }
 
 /* Contact form */
@@ -244,6 +243,8 @@ footer nav li {
 	background-color: #000000;
 	height: 60px;
 	gap: 12px;
+	margin-left: -142.5px;
+	margin-right: -142.5px;
 }
 
 .edit-banner p,
@@ -257,10 +258,10 @@ footer nav li {
 	justify-content: center;
 	align-items: center;
 	gap: 20px;
+	margin-top: 8.5em;
+	margin-bottom: 3em;
 }
-.header-portfolio h2 {
-	margin: 0;
-}
+
 .modify-button {
 	display: flex;
 	align-items: center;

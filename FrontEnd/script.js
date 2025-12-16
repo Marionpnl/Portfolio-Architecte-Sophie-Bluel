@@ -1,5 +1,6 @@
 let projets = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées
+const token = window.localStorage.getItem("authToken"); // Récupération du token d'authentification depuis le localStorage
 
 // Appel de l'API pour récupérer les projets
 async function recupererProjets() {
@@ -31,7 +32,6 @@ function afficherProjets(projets) {
         console.log("Projet ajouté!", imageProjet, titreProjet);
     }
 }
-
 
 // Appel de l'API pour récupérer les catégories des filtres
 async function recupererCategories() {
@@ -87,16 +87,27 @@ function filtrerProjets() {
     })
 }
 
+// Modification de la page d'accueil si l'utilisateur est logué
 function modifierHomePagePourUtilisateurLogue() {
-    const token = window.localStorage.getItem("authToken");
-
     if (token) {
-    // L'utilisateur est "logué"
+    // Si l'utilisateur est "logué"
         // Modification du bouton "login" en "logout"
         document.querySelector(".login").textContent = "logout";
 
         // Ajout de la bannière 
-        const banner = document.createElement("div");
+        addEditBanner();
+
+        // Ajout du bouton "modifier" dans une div avec le h2 existant
+        addModifyButton();
+
+        deconnecterUtilisateur(); // Appel de la fonction pour gérer la déconnexion
+    } else {
+        // L'utilisateur est "visiteur"
+    }
+}
+
+function addEditBanner() {
+    const banner = document.createElement("div");
         banner.classList.add("edit-banner");
         banner.innerHTML = `
             <i class="fa-regular fa-pen-to-square"></i>
@@ -104,27 +115,23 @@ function modifierHomePagePourUtilisateurLogue() {
             `;
         const header = document.querySelector("header");
         header.before(banner);
+}
 
-        // Ajout du bouton "modifier" 
-        const modifyButton = document.createElement("button");
-        modifyButton.classList.add("modify-button");
-        modifyButton.innerHTML = `
-            <i class="fa-regular fa-pen-to-square"></i>
-            <p>modifier</p>
-            `;
-        const portfolioHeader = document.createElement("div");
-        portfolioHeader.classList.add("header-portfolio");
+function addModifyButton() {
+    const modifyButton = document.createElement("button");
+    modifyButton.classList.add("modify-button");
+    modifyButton.innerHTML = `
+        <i class="fa-regular fa-pen-to-square"></i>
+        <p>modifier</p>
+        `;
+    const portfolioHeader = document.createElement("div");
+    portfolioHeader.classList.add("header-portfolio");
    
-        const portfolioTitle = document.querySelector("#portfolio h2");
-        portfolioHeader.append(portfolioTitle, modifyButton);
+    const portfolioTitle = document.querySelector("#portfolio h2");
+    portfolioHeader.append(portfolioTitle, modifyButton);
 
-        const portfolioSection = document.getElementById("portfolio");
-        portfolioSection.prepend(portfolioHeader);
-
-        deconnecterUtilisateur(); // Appel de la fonction pour gérer la déconnexion
-    } else {
-        // L'utilisateur est "visiteur"
-    }
+    const portfolioSection = document.getElementById("portfolio");
+    portfolioSection.prepend(portfolioHeader);
 }
 
 function deconnecterUtilisateur() {
