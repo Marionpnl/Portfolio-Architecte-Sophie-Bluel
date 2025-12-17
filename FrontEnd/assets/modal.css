@@ -26,15 +26,16 @@
     background-color: #ffffff;
 }
 
-.back-modal {
-    align-self: flex-start;
-    background: none;
-    border: none;
-    cursor: pointer;
+.navigation-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 550px;
+    padding-top: 20px;
 }
 
-.close-modal{
-    align-self: flex-end;
+.navigation-modal .back-modal,
+.navigation-modal .close-modal{
     background: none;
     border: none;
     cursor: pointer;
