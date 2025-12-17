@@ -3,10 +3,6 @@ let categories = []; // Tableau pour stocker les catégories récupérées
 
 const token = window.localStorage.getItem("authToken"); // Récupération du token d'authentification depuis le localStorage
 
-const modal = document.querySelector("#modal"); // Sélection de la modale
-const galleryModal = document.querySelector(".gallery-view");
-const formModal = document.querySelector(".form-view");
-
 // Appel de l'API pour récupérer les projets
 async function getProjects() {
     const response = await fetch("http://localhost:5678/api/works")
@@ -150,68 +146,7 @@ function disconnectUser() {
     })
 }       
 
-// Gestion des modales
-
-// Ouverture de la modale au clic sur le bouton "modifier"
-function openModalGalleryView() {
-    const modifyButton = document.querySelector(".modal-button");
-
-    modifyButton.addEventListener("click", () => {
-        console.log("clic sur le bouton modifier");
-        modal.style.display = "flex";
-        formModal.style.display = "none";
-        modal.removeAttribute("aria-hidden");
-        modal.setAttribute("aria-modal", "true");
-    });
-}
-
-// Ouverture de la modale formulaire au clic sur le bouton "ajouter une photo"
-function openModalFormView() {   
-    const addPhotoButton = document.querySelector(".modal-form-button");
-
-    addPhotoButton.addEventListener("click", () => {
-        console.log("clic sur le bouton ajouter une photo");
-        modal.style.display = "flex";
-        galleryModal.style.display = "none";
-        formModal.style.display = "flex";
-        modal.removeAttribute("aria-hidden");
-        modal.setAttribute("aria-modal", "true");
-    });
-}
-// Fermeture des modales
-function closeModal() {
-    const closeModalButton = document.querySelector(".close-modal");
-    // Au clic sur la croix
-    closeModalButton.addEventListener("click", () => {
-        modal.style.display = "none";
-        modal.setAttribute("aria-hidden", "true");
-        modal.removeAttribute("aria-modal");
-    });
-    // Au clic en dehors du wrapper
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) { // Si on clique sur le fond noir (l'aside) et non le wrapper
-        modal.style.display = 'none';
-        }
-    });
-}
-
-// Gestion de l'ouverture et de la fermeture de la modale gallerie
-function modalGalleryView() {
-    openModalGalleryView();
-    closeModal();
-    
-    console.log("Modale trouvée :", modal);
-    console.log("Bouton modifier trouvé :", openModalGalleryView);
-}
-
-// Gestion de l'ouverture et de la fermeture de la modale formulaire
-function modalFormView() {
-    openModalFormView();
-    closeModal();
-
-    console.log("Modale trouvée :", modal);
-    console.log("Bouton ajouter une photo trouvé :", addPhotoButton);
-}
+// Appel des fonctions au chargement de la page
 
 getProjects(); // Appel de la fonction pour récupérer et afficher les projets
 
