@@ -262,12 +262,13 @@ footer nav li {
 	margin-bottom: 3em;
 }
 
-.modify-button {
+.modal-button {
 	display: flex;
 	align-items: center;
 	gap: 10px;
 	border: none;
 	background-color: #FFFEF8;
 	font-family: "work sans";
+	cursor: pointer;
 }
 
