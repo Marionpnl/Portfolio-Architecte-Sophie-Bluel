@@ -74,21 +74,26 @@
 		</div>
 		<div class="form-view">
 			<h2 id="title-modal" class="title-modal">Ajout photo</h2>
-			<div class="add-photo">
-				<i class="fa-regular fa-image"></i>
-				<button>+ Ajouter photo</button>
-				<p>jpg, png: 4mo max</p>
-			</div>
-			<div class="form-photo">
-				<form>
-					<label for="title-photo">Titre</label>
-					<input type="text" name="title-photo" id="title-photo">
-					<label for="category-photo">Catégorie</label>
-					<select name="category-photo" id="category-photo">
-					</select>
-					<button type="submit">Valider</button>
-				</form>
-			</div>
+			<form class="form-photo">
+				<div class="add-photo">
+					<i class="fa-regular fa-image"></i>
+					<button>+ Ajouter photo</button>
+					<p>jpg, png: 4mo max</p>
+				</div>
+				<div class="comment-photo">
+					<fieldset>
+						<label for="title-photo">Titre</label>
+						<input type="text" name="title-photo" id="title-photo">
+					</fieldset>
+					<fieldset class="category-area">
+						<label for="category-photo">Catégorie</label>
+						<select name="category-photo" id="category-photo"></select>
+					</fieldset>
+					<fieldset class="button-validate">
+						<button type="submit">Valider</button>
+					</fieldset>				
+				</div>
+			</form>
 		</div>
 	</div>
 </aside>

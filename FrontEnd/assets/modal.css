@@ -1,3 +1,4 @@
+/* Modal CSS Styles Global */
 .modal {
     position: fixed;
     display: flex;
@@ -10,7 +11,9 @@
     background-color: rgba(0, 0, 0, 0.5);   
 }
 
-.modal-wrapper {
+.modal-wrapper,
+.gallery-view,
+.form-view{
     overflow: auto;
     display: flex;
     flex-direction: column;
@@ -23,7 +26,14 @@
     background-color: #ffffff;
 }
 
-.close-modal {
+.back-modal {
+    align-self: flex-start;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.close-modal{
     align-self: flex-end;
     background: none;
     border: none;
@@ -36,23 +46,115 @@
     font-weight: 400;
     color: #000000;
 }
-
+/* Gallery View */
 .photos {
+    background-color: #ffffff;
     width: 420px;
     padding: 30px 0px 60px 0px;    
     border-bottom: 1px #B3B3B3 solid;
 }
 
-.modal-wrapper button[type="button"] {
+.gallery-view button[type="button"] {
     font-family: 'Syne';
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
     border: none;
     height: 36px;
     width: 35%;
+}
+
+/* Form View */
+    /* Partie ajout photo */
+.form-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 70%;
+    background-color: #ffffff;
+}
+
+.form-photo .add-photo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #E8F1F6;
+    height: 169px;
+    border-radius: 3px;
+}
+
+.add-photo i {
+    background-color: #E8F1F6;
+    color: #B9C5CC;
+    font-size: 76px;
+    width: 76px;
+}
+
+.add-photo button {
+    font-family: "work Sans";
+    background-color: #CBD6DC;
+    color: #306685;
+    text-align: center;
+	border-radius: 60px ;
+    border: none;
+    height: 36px;
+    width: 45%;
+}
+
+.add-photo p {
+    font-family: "Work Sans";
+    font-size: 10px;
+    background-color: #E8F1F6;
+}
+
+    /* Partie titre & catégorie photo */
+.form-photo .comment-photo {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    background-color: #ffffff;
+}
+
+.comment-photo fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    background-color: #ffffff;
+}
+.comment-photo label {
+    background-color: #ffffff;
+}
+
+.comment-photo input,
+.comment-photo select {
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+    height: 50px;
+}
+
+.category-area {
+    padding-bottom: 25px;
+}
+
+.button-validate {
+    padding-top: 30px;
+    border-top: 1px #B3B3B3 solid;
+}
+
+.comment-photo button[type="submit"] {
+    width: 50%;
+    align-self: center;
+    font-family: 'Syne';
+	font-weight: 700;
+    color: #ffffff;
+    background-color: #A7A7A7;
+    text-align: center;
+	border-radius: 60px ;
+    border: none;
+    height: 36px;
 }
