@@ -1,4 +1,5 @@
 import { showProjects, showCategories } from './gallery.js';
+import { showProjectsInModal } from './modal.js';
 
 let projects = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées
@@ -25,4 +26,14 @@ async function getCategories(token) {
     }
 }
 
-export { getProjects, getCategories };
+
+// Appel de l'API pour récupérer les projets dans la modale
+async function getProjectsForModal() {
+    const response = await fetch("http://localhost:5678/api/works")
+    projects = await response.json(); //liste des projets
+
+    console.log("Projets récupérés!", projects);
+    showProjectsInModal(projects); // Appel de la fonction pour afficher les projets dans la modale
+}
+
+export { getProjects, getCategories, getProjectsForModal };

@@ -1,4 +1,6 @@
 // Gestion des modales
+import { getProjectsForModal } from './api.js';
+
 const modal = document.querySelector("#modal"); // Sélection de la modale
 const galleryModal = document.querySelector(".gallery-view"); // Sélection de la vue gallerie de la modale
 const formModal = document.querySelector(".form-view"); // Sélection de la vue formulaire de la modale
@@ -13,6 +15,7 @@ function openModalGalleryView() {
         formModal.style.display = "none";
         modal.removeAttribute("aria-hidden");
         modal.setAttribute("aria-modal", "true");
+        getProjectsForModal(); // Récupération des projets pour affichage dans la modale
     });
 }
 
@@ -20,13 +23,13 @@ function openModalGalleryView() {
 function openModalFormView() {   
     const addPhotoButton = document.querySelector(".modal-form-button");
 
-    addPhotoButton.addEventListener("click", () => {
+    addPhotoButton.addEventListener("click", (event) => {
         console.log("clic sur le bouton ajouter une photo");
-        
+
         galleryModal.style.display = "none";
         formModal.style.display = "flex";
         modal.removeAttribute("aria-hidden");
-        modal.setAttribute("aria-modal", "true");
+        modal.setAttribute("aria-modal", "true");       
     });
 }
 
@@ -47,24 +50,21 @@ function closeModal() {
     });
 }
 
-// Appel de l'API pour récupérer les projets
-async function getProjectsForModal() {
-    const response = await fetch("http://localhost:5678/api/works")
-    projects = await response.json(); //liste des projets
-
-    console.log("Projets récupérés!", projects);
-    showProjectsInModal(projects); // Appel de la fonction pour afficher les projets dans la modale
-}
-
 // Gestion de l'affichage des travaux de la gallerie dans la modale
 function showProjectsInModal(projects) {
     const photosContainer = document.querySelector(".gallery-view .photos");
     photosContainer.innerHTML = ""; // Vider le conteneur avant d'ajouter les projets
 
     for (let i = 0; i < projects.length; i++) {
+    
         const imageProject = document.createElement("img");
         imageProject.src = projects[i].imageUrl;
+        imageProject.alt = projects[i].title;
 
+        const trashIcon = document.createElement("i");
+        trashIcon.classList.add("fa-solid", "fa-trash-can");
+
+        imageProject.appendChild(trashIcon);
         photosContainer.appendChild(imageProject);
 
         console.log("Projet ajouté dans la modale!", imageProject);
@@ -81,3 +81,4 @@ export function initModal() {
     console.log("Bouton modifier trouvé :", openModalGalleryView);
 }
 
+export { showProjectsInModal };

@@ -33,6 +33,7 @@
     align-items: center;
     gap: 550px;
     padding-top: 20px;
+    background-color: #ffffff;
 }
 
 .navigation-modal .back-modal,
@@ -52,10 +53,21 @@
 /* Gallery View */
 
 .photos {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px 10px;
     background-color: #ffffff;
-    width: 420px;
+    width: 70%;
     padding: 30px 0px 60px 0px;    
     border-bottom: 1px #B3B3B3 solid;
+}
+
+.photos img {
+    display: flex;
+    flex: 0 0 calc(20.4% - 10px);
+    height: 102px  ;
 }
 
 .modal-form-button {
