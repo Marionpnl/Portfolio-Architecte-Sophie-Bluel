@@ -19,11 +19,34 @@ function openModalGalleryView() {
     });
 }
 
+// Gestion de l'affichage des travaux de la gallerie dans la modale
+function showProjectsInModal(projects) {
+    const photosContainer = document.querySelector(".gallery-view .photos");
+    photosContainer.innerHTML = ""; // Vider le conteneur avant d'ajouter les projets
+
+    for (let i = 0; i < projects.length; i++) {
+        const imageSheet = document.createElement("figure");
+
+        const imageProject = document.createElement("img");
+        imageProject.src = projects[i].imageUrl;
+        imageProject.alt = projects[i].title;
+
+        const trashIcon = document.createElement("i");
+        trashIcon.classList.add("fa-solid", "fa-trash-can");
+        
+        imageSheet.appendChild(imageProject);
+        imageSheet.appendChild(trashIcon);
+        photosContainer.appendChild(imageSheet);
+
+        console.log("Projet ajouté dans la modale!", imageProject);
+    }
+}
+
 // Ouverture de la modale formulaire au clic sur le bouton "ajouter une photo"
 function openModalFormView() {   
     const addPhotoButton = document.querySelector(".modal-form-button");
 
-    addPhotoButton.addEventListener("click", (event) => {
+    addPhotoButton.addEventListener("click", () => {
         console.log("clic sur le bouton ajouter une photo");
 
         galleryModal.style.display = "none";
@@ -50,26 +73,7 @@ function closeModal() {
     });
 }
 
-// Gestion de l'affichage des travaux de la gallerie dans la modale
-function showProjectsInModal(projects) {
-    const photosContainer = document.querySelector(".gallery-view .photos");
-    photosContainer.innerHTML = ""; // Vider le conteneur avant d'ajouter les projets
 
-    for (let i = 0; i < projects.length; i++) {
-    
-        const imageProject = document.createElement("img");
-        imageProject.src = projects[i].imageUrl;
-        imageProject.alt = projects[i].title;
-
-        const trashIcon = document.createElement("i");
-        trashIcon.classList.add("fa-solid", "fa-trash-can");
-
-        imageProject.appendChild(trashIcon);
-        photosContainer.appendChild(imageProject);
-
-        console.log("Projet ajouté dans la modale!", imageProject);
-    }
-}
 
 // Gestion de l'ouverture et de la fermeture des modales
 export function initModal() {
