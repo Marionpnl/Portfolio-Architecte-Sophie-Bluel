@@ -4,19 +4,26 @@ import { getProjectsForModal } from './api.js';
 const modal = document.querySelector("#modal"); // Sélection de la modale
 const galleryModal = document.querySelector(".gallery-view"); // Sélection de la vue gallerie de la modale
 const formModal = document.querySelector(".form-view"); // Sélection de la vue formulaire de la modale
+const backButton = document.querySelector(".back-modal"); // Sélection du bouton retour de la modale
 
-// Ouverture de la modale gallerie au clic sur le bouton "modifier"
-function openModalGalleryView() {
-    const modifyButton = document.querySelector(".modal-button");
+// Fonction d'ouverture des modales
+function openModal (view) {
+    modal.style.display = "flex";
+    modal.removeAttribute("aria-hidden");
+    modal.setAttribute("aria-modal", "true");
 
-    modifyButton.addEventListener("click", () => {
-        console.log("clic sur le bouton modifier");
-        modal.style.display = "flex";
+    if (view === "gallery") {
+        galleryModal.style.display = "flex";
         formModal.style.display = "none";
-        modal.removeAttribute("aria-hidden");
-        modal.setAttribute("aria-modal", "true");
+        backButton.style.display = "none";
         getProjectsForModal(); // Récupération des projets pour affichage dans la modale
-    });
+    }
+    
+    if (view === "form") {
+        galleryModal.style.display = "none";
+        formModal.style.display = "flex";
+        backButton.style.display = "flex";
+    }
 }
 
 // Gestion de l'affichage des travaux de la gallerie dans la modale
@@ -42,29 +49,16 @@ function showProjectsInModal(projects) {
     }
 }
 
-// Ouverture de la modale formulaire au clic sur le bouton "ajouter une photo"
-function openModalFormView() {   
-    const addPhotoButton = document.querySelector(".modal-form-button");
-
-    addPhotoButton.addEventListener("click", () => {
-        console.log("clic sur le bouton ajouter une photo");
-
-        galleryModal.style.display = "none";
-        formModal.style.display = "flex";
-        modal.removeAttribute("aria-hidden");
-        modal.setAttribute("aria-modal", "true");       
-    });
-}
-
 // Reouverture de la modale gallerie au clic sur la flèche "retour"
 function backToGalleryView() {
-    const backButton = document.querySelector(".back-modal");
+    
     backButton.addEventListener("click", () => {
         console.log("clic sur le bouton retour");
         galleryModal.style.display = "flex";
         formModal.style.display = "none";
         modal.removeAttribute("aria-hidden");
         modal.setAttribute("aria-modal", "true");
+        backButton.style.display = "none";
         getProjectsForModal(); // Récupération des projets pour affichage dans la modale
     })
 }
@@ -84,17 +78,31 @@ function closeModal() {
         modal.style.display = 'none';
         }
     });
+
 }
 
 // Gestion de l'ouverture et de la fermeture des modales
 export function initModal() {
-    openModalGalleryView();
-    openModalFormView();
+    // Ajout des écouteurs d'événements pour l'ouverture des modales
+    const modifyButton = document.querySelector(".modal-button");
+    const addPhotoButton = document.querySelector(".modal-form-button");
+    
+    modifyButton.addEventListener("click", () => {
+        console.log("clic sur le bouton modifier");
+        
+        openModal("gallery");
+    });
+
+    addPhotoButton.addEventListener("click", () => {
+        console.log("clic sur le bouton ajouter une photo");
+        openModal("form");
+    });
+
     backToGalleryView();
     closeModal();
     
     console.log("Modale trouvée :", modal);
-    console.log("Bouton modifier trouvé :", openModalGalleryView);
+    console.log("Bouton modifier trouvé :", openModal);
 }
 
 export { showProjectsInModal };
