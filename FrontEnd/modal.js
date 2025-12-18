@@ -75,7 +75,6 @@ function showProjectsInModal(projects) {
 export function initModal() {
     openModalGalleryView();
     openModalFormView();
-    getProjectsForModal();
     closeModal();
     
     console.log("Modale trouvée :", modal);
