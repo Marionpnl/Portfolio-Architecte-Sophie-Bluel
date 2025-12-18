@@ -78,7 +78,12 @@ function closeModal() {
         modal.style.display = 'none';
         }
     });
-
+    // A l'appuie sur la touche Echap/Escape/Esc
+    window.addEventListener ("keydown", (event) => {
+        if (event.key === "Escape" || event.key === "Esc") {
+        modal.style.display = 'none';
+        }
+    })
 }
 
 // Gestion de l'ouverture et de la fermeture des modales
