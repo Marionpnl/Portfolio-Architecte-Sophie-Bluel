@@ -56,6 +56,19 @@ function openModalFormView() {
     });
 }
 
+// Reouverture de la modale gallerie au clic sur la flèche "retour"
+function backToGalleryView() {
+    const backButton = document.querySelector(".back-modal");
+    backButton.addEventListener("click", () => {
+        console.log("clic sur le bouton retour");
+        galleryModal.style.display = "flex";
+        formModal.style.display = "none";
+        modal.removeAttribute("aria-hidden");
+        modal.setAttribute("aria-modal", "true");
+        getProjectsForModal(); // Récupération des projets pour affichage dans la modale
+    })
+}
+
 // Fermeture des modales
 function closeModal() {
     const closeModalButton = document.querySelector(".close-modal");
@@ -73,12 +86,11 @@ function closeModal() {
     });
 }
 
-
-
 // Gestion de l'ouverture et de la fermeture des modales
 export function initModal() {
     openModalGalleryView();
     openModalFormView();
+    backToGalleryView();
     closeModal();
     
     console.log("Modale trouvée :", modal);
