@@ -9,12 +9,12 @@ async function saveLoginData (){
             email: event.target.querySelector("#email").value,
             password: event.target.querySelector("#password").value
         };
-        const chargeUtile = JSON.stringify(loginData);
+        const payLoad = JSON.stringify(loginData);
         //Envoi des données à l'API
         const response = await fetch("http://localhost:5678/api/users/login", {
             method: "POST",
             headers: {"Content-Type": "application/json"},
-            body: chargeUtile
+            body: payLoad
         })
         // Traitement de la réponse de l'API au format JSON
         const data = await response.json();

@@ -1,11 +1,9 @@
 // Gestion des modales
-let projects = []; // Tableau pour stocker les projets récupérés
-
 const modal = document.querySelector("#modal"); // Sélection de la modale
-const galleryModal = document.querySelector(".gallery-view");
-const formModal = document.querySelector(".form-view");
+const galleryModal = document.querySelector(".gallery-view"); // Sélection de la vue gallerie de la modale
+const formModal = document.querySelector(".form-view"); // Sélection de la vue formulaire de la modale
 
-// Ouverture de la modale au clic sur le bouton "modifier"
+// Ouverture de la modale gallerie au clic sur le bouton "modifier"
 function openModalGalleryView() {
     const modifyButton = document.querySelector(".modal-button");
 
@@ -24,7 +22,7 @@ function openModalFormView() {
 
     addPhotoButton.addEventListener("click", () => {
         console.log("clic sur le bouton ajouter une photo");
-        modal.style.display = "flex";
+        
         galleryModal.style.display = "none";
         formModal.style.display = "flex";
         modal.removeAttribute("aria-hidden");
@@ -50,7 +48,7 @@ function closeModal() {
 }
 
 // Appel de l'API pour récupérer les projets
-async function getProjects() {
+async function getProjectsForModal() {
     const response = await fetch("http://localhost:5678/api/works")
     projects = await response.json(); //liste des projets
 
@@ -73,21 +71,14 @@ function showProjectsInModal(projects) {
     }
 }
 
-// Gestion de l'ouverture et de la fermeture de la modale gallerie
-function modalGalleryView() {
+// Gestion de l'ouverture et de la fermeture des modales
+export function initModal() {
     openModalGalleryView();
-    getProjects();
+    openModalFormView();
+    getProjectsForModal();
     closeModal();
     
     console.log("Modale trouvée :", modal);
     console.log("Bouton modifier trouvé :", openModalGalleryView);
 }
 
-// Gestion de l'ouverture et de la fermeture de la modale formulaire
-function modalFormView() {
-    openModalFormView();
-    closeModal();
-
-    console.log("Modale trouvée :", modal);
-    console.log("Bouton ajouter une photo trouvé :", addPhotoButton);
-}

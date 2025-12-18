@@ -1,3 +1,5 @@
+import { initModal } from './modal.js';
+
 let projects = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées
 
@@ -154,5 +156,4 @@ getCategories(); // Appel de la fonction pour récupérer et afficher les bouton
 
 modifyHomePageForUserConnected(); // Appel de la fonction pour modifier la page d'accueil si l'utilisateur est logué
 
-modalGalleryView(); // Appel de la fonction pour gérer l'ouverture et la fermeture de la modal
-modalFormView(); // Appel de la fonction pour gérer l'ouverture et la fermeture de la modal formulaire
+initModal(); // Appel de la fonction pour gérer l'ouverture et la fermeture de la modal
