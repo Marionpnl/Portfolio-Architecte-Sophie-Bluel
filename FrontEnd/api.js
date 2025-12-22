@@ -26,7 +26,6 @@ async function getCategories(token) {
     }
 }
 
-
 // Appel de l'API pour récupérer les projets dans la modale
 async function getProjectsForModal() {
     const response = await fetch("http://localhost:5678/api/works")
@@ -34,6 +33,11 @@ async function getProjectsForModal() {
 
     console.log("Projets récupérés!", projects);
     showProjectsInModal(projects); // Appel de la fonction pour afficher les projets dans la modale
+}
+
+// Appel de l'API pour supprimer des projets
+async function deleteProjects (){
+   
 }
 
 export { getProjects, getCategories, getProjectsForModal };
