@@ -1,3 +1,9 @@
 { 
-    "liveServer.settings.ignoreFiles": ["Backend/**"] 
+    "liveServer.settings.ignoreFiles": [
+        "Backend/**"
+    ],
+    "editor.quickSuggestions": {
+        "comments": "inline",
+        "strings": "inline"
+    }
 }

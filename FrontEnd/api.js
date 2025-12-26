@@ -1,5 +1,4 @@
-import { showProjects, showCategories } from './gallery.js';
-import { showProjectsInModal } from './modal.js';
+import { showProjects, showCategories, showProjectsInModal } from './gallery.js';
 
 let projects = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées
@@ -35,9 +34,20 @@ async function getProjectsForModal() {
     showProjectsInModal(projects); // Appel de la fonction pour afficher les projets dans la modale
 }
 
-// Appel de l'API pour supprimer des projets
-async function deleteProjects (){
-   
+// Appel de l'API pour supprimer les projets 
+async function deleteProjects (id){
+    const token = window.localStorage.getItem("authToken");
+
+    const response = await fetch(`http://localhost:5678/api/works/${id}`,{
+      method: "DELETE",
+      headers: {
+        "Authorization": `Bearer ${token}`
+      }
+    });
+    if (!response.ok){
+        throw new Error ("Echec de la suppression, erreur API");
+    }
+    console.log("Projet supprimé côté API");
 }
 
-export { getProjects, getCategories, getProjectsForModal };
+export { getProjects, getCategories, getProjectsForModal, deleteProjects };

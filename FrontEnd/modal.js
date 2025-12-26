@@ -1,8 +1,8 @@
     // Gestion des modales
-// Import de la fonction API
-import { getProjectsForModal } from './api.js';
+// Import des fonctions API
+import { getProjectsForModal, deleteProjects } from './api.js';
 // Déclaration des constantes
-const main = document.querySelector("main")
+const main = document.querySelector("main"); // Sélection de la page principale
 const modal = document.querySelector("#modal"); // Sélection de la modale
 const galleryModal = document.querySelector(".gallery-view"); // Sélection de la vue gallerie de la modale
 const formModal = document.querySelector(".form-view"); // Sélection de la vue formulaire de la modale
@@ -33,29 +33,6 @@ function openModal (view) {
         backButton.style.display = "flex";
     }
     trapFocus(modal); // Appel de la fonction pour activer le focus trap à l'ouverture de la modale
-}
-
-// Gestion de l'affichage des travaux de la gallerie dans la modale
-function showProjectsInModal(projects) {
-    const photosContainer = document.querySelector(".gallery-view .photos");
-    photosContainer.innerHTML = ""; // Vider le conteneur avant d'ajouter les projets
-
-    for (let i = 0; i < projects.length; i++) {
-        const imageSheet = document.createElement("figure");
-
-        const imageProject = document.createElement("img");
-        imageProject.src = projects[i].imageUrl;
-        imageProject.alt = projects[i].title;
-
-        const trashIcon = document.createElement("i");
-        trashIcon.classList.add("fa-solid", "fa-trash-can");
-        
-        imageSheet.appendChild(imageProject);
-        imageSheet.appendChild(trashIcon);
-        photosContainer.appendChild(imageSheet);
-
-        console.log("Projet ajouté dans la modale!", imageProject);
-    }
 }
 
 // Reouverture de la modale gallerie au clic sur la flèche "retour"
@@ -101,6 +78,26 @@ function closeModal() {
     lastFocusedElement?.focus();
 }
 
+// Suppression des photos de la gallerie de modale au clic sur l'icone poubelle
+function deleteProjectByTrashIcon () {
+    const galleryModal = document.querySelector (".gallery-view .photos");
+
+    galleryModal.addEventListener ("click", async (event) => {
+        const trashIcon = event.target.closest(".fa-solid, .fa-trash-can");
+        if (!trashIcon) return;
+
+        const id = trashIcon.dataset.id;
+        const figure = trashIcon.closest("figure");
+        try {
+            await deleteProjects(id);
+            figure.remove();
+            console.log("Projet supprimé du DOM")
+        } catch (error) {
+            alert("Suppression impossible")
+        }
+    })
+}
+
 // Gestion de l'ouverture et de la fermeture des modales
 export function initModal() {
     // Déclaration des boutons
@@ -139,6 +136,7 @@ export function initModal() {
     })
     console.log("Modale trouvée :", modal);
     console.log("Bouton modifier trouvé :", openModal);
+
+    deleteProjectByTrashIcon();
 }
 
-export { showProjectsInModal };
