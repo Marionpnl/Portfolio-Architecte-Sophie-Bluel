@@ -1,4 +1,4 @@
-import { addProject } from "./api";
+import { addProject, getCategoriesForModalForm } from "./api.js";
 
 const form = document.querySelector(".form-photo");
 
@@ -13,7 +13,15 @@ function submittingAddForm () {
         }
 
         await addProject(formData);
+
+        console.log("Listener submit actif");
     })
 }
 
+function initModalForm () {
+    getCategoriesForModalForm();
+    
+    submittingAddForm();
+}
 
+export { initModalForm };

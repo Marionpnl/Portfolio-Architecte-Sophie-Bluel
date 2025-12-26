@@ -2,6 +2,7 @@ import { showProjects, showCategories, showProjectsInModal } from './gallery.js'
 
 let projects = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées
+const token = window.localStorage.getItem("authToken");
 
 // Appel de l'API pour récupérer les projets
 async function getProjects() {
@@ -36,7 +37,6 @@ async function getProjectsForModal() {
 
 // Appel de l'API pour supprimer les projets 
 async function deleteProjects (id){
-    const token = window.localStorage.getItem("authToken");
 
     const response = await fetch(`http://localhost:5678/api/works/${id}`,{
       method: "DELETE",
@@ -68,4 +68,20 @@ async function addProject (formData) {
     return newProject;
 }
 
-export { getProjects, getCategories, getProjectsForModal, deleteProjects, addProject };
+async function getCategoriesForModalForm () {
+    const response = await fetch("http://localhost:5678/api/categories");
+    const categories = await response.json();
+
+    const select = document.getElementById("category-photo");
+
+    categories.forEach(element => {
+        const option = document.createElement("option");
+        option.value = element.id;
+        option.textContent = element.name;
+        select.appendChild(option);
+    });
+
+    console.log("Catégories récupérées dans le select")
+}
+
+export { getProjects, getCategories, getProjectsForModal, deleteProjects, addProject, getCategoriesForModalForm };
