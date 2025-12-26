@@ -50,4 +50,22 @@ async function deleteProjects (id){
     console.log("Projet supprimé côté API");
 }
 
-export { getProjects, getCategories, getProjectsForModal, deleteProjects };
+// Appel de l'API pour ajouter un projet
+async function addProject (formData) {
+    const response = await fetch ("http://localhost:5678/api/works", {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+    });
+
+    if (!response.ok) {
+        console.error("Erreur lors de l'ajout du projet");
+    }
+
+    const newProject = await response.json();
+    return newProject;
+}
+
+export { getProjects, getCategories, getProjectsForModal, deleteProjects, addProject };

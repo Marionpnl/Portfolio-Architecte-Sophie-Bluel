@@ -2,6 +2,8 @@
 // Import des fonctions API
 import { getProjectsForModal } from './api.js';
 import { deleteProjectByTrashIcon } from './modal-gallery.js';
+
+
 // Déclaration des constantes
 const main = document.querySelector("main"); // Sélection de la page principale
 const modal = document.querySelector("#modal"); // Sélection de la modale
@@ -119,5 +121,6 @@ export function initModal() {
     console.log("Bouton modifier trouvé :", openModal);
 
     deleteProjectByTrashIcon();
+    
 }
 
