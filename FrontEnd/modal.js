@@ -1,6 +1,7 @@
     // Gestion des modales
 // Import des fonctions API
-import { getProjectsForModal, deleteProjects } from './api.js';
+import { getProjectsForModal } from './api.js';
+import { deleteProjectByTrashIcon } from './modal-gallery.js';
 // Déclaration des constantes
 const main = document.querySelector("main"); // Sélection de la page principale
 const modal = document.querySelector("#modal"); // Sélection de la modale
@@ -76,26 +77,6 @@ function closeModal() {
     modal.removeAttribute("aria-modal");
     main.inert = false;
     lastFocusedElement?.focus();
-}
-
-// Suppression des photos de la gallerie de modale au clic sur l'icone poubelle
-function deleteProjectByTrashIcon () {
-    const galleryModal = document.querySelector (".gallery-view .photos");
-
-    galleryModal.addEventListener ("click", async (event) => {
-        const trashIcon = event.target.closest(".fa-solid, .fa-trash-can");
-        if (!trashIcon) return;
-
-        const id = trashIcon.dataset.id;
-        const figure = trashIcon.closest("figure");
-        try {
-            await deleteProjects(id);
-            figure.remove();
-            console.log("Projet supprimé du DOM")
-        } catch (error) {
-            alert("Suppression impossible")
-        }
-    })
 }
 
 // Gestion de l'ouverture et de la fermeture des modales
