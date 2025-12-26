@@ -137,7 +137,14 @@
     width: 76px;
 }
 
-.add-photo button {
+.add-photo input {
+    display: none;
+}
+
+.add-photo label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-family: "work Sans";
     background-color: #CBD6DC;
     color: #306685;
@@ -146,6 +153,7 @@
     border: none;
     height: 36px;
     width: 45%;
+    cursor: pointer;
 }
 
 .add-photo p {
