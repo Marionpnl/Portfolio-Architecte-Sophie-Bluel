@@ -3,7 +3,7 @@
 function modifyHomePageForUserConnected(token) {
     if (token) {
     // Si l'utilisateur est "logué"
-        document.querySelector(".login").textContent = "logout"; // Modification du bouton "login" en "logout"
+        document.querySelector(".login a").textContent = "logout"; // Modification du bouton "login" en "logout"
         
         removeFiltersForConnectedUser(); // Suppression des filtres
         
