@@ -217,7 +217,7 @@
     border-top: 1px #B3B3B3 solid;
 }
 
-.comment-photo button[type="submit"] {
+.submit-button {
     width: 50%;
     align-self: center;
     font-family: 'Syne';
@@ -228,5 +228,9 @@
 	border-radius: 60px ;
     border: none;
     height: 36px;
+}
+
+.submit-button.active {
+    background-color: #1D6154;
     cursor: pointer;
 }
