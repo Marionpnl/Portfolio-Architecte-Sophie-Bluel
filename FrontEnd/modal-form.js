@@ -10,6 +10,15 @@ function submittingAddForm () {
     form.addEventListener ("submit", async (event) => {
         event.preventDefault();
 
+        const image = document.querySelector("input[name='image']");
+        const title = document.querySelector('input[name="title"]');
+        const category = document.querySelector('select[name="category"]');
+        
+        if (!image.files.length || !title.value || !category.value) {
+            alert("Veuillez remplir tous les champs !");
+            return;
+        }
+
         const formData = new FormData(form);
 
         for (let [key, value] of formData.entries()) {
@@ -20,7 +29,7 @@ function submittingAddForm () {
 
         console.log("Listener submit actif");
         console.log("Projet ajouté", newProject);
-
+        
         addProjectToGallery(newProject);
 
         form.reset();
@@ -31,7 +40,7 @@ function previewImageOnChange() {
     fileInput.addEventListener ("change", () => {
         const file = fileInput.files[0];
         console.log(file);
-        
+
         const validTypes = ["image/jpeg", "image/png"];
         if (!validTypes.includes(file.type)) {
             alert ("Format invalide. JPG ou PNG uniquement");
