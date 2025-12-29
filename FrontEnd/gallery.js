@@ -8,6 +8,7 @@ function showProjects(projects) {
         const projectSheet = document.createElement("figure");
         const projectImage = document.createElement("img");
         projectImage.src = projects[i].imageUrl;
+        projectImage.alt = projects[i].title;
         const projectTitle = document.createElement("figcaption");
         projectTitle.innerText = projects[i].title;
 

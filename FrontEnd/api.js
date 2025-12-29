@@ -2,7 +2,6 @@ import { showProjects, showCategories, showProjectsInModal } from './gallery.js'
 
 let projects = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées
-const token = window.localStorage.getItem("authToken");
 
 // Appel de l'API pour récupérer les projets
 async function getProjects() {
@@ -37,6 +36,7 @@ async function getProjectsForModal() {
 
 // Appel de l'API pour supprimer les projets 
 async function deleteProjects (id){
+    const token = window.localStorage.getItem("authToken");
 
     const response = await fetch(`http://localhost:5678/api/works/${id}`,{
       method: "DELETE",
@@ -52,6 +52,8 @@ async function deleteProjects (id){
 
 // Appel de l'API pour ajouter un projet
 async function addProject (formData) {
+    const token = window.localStorage.getItem("authToken");
+
     const response = await fetch ("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
@@ -67,6 +69,7 @@ async function addProject (formData) {
     const newProject = await response.json();
     return newProject;
 }
+  
 
 async function getCategoriesForModalForm () {
     const response = await fetch("http://localhost:5678/api/categories");

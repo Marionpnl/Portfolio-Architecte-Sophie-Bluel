@@ -12,9 +12,12 @@ function submittingAddForm () {
             console.log(key, value);
         }
 
-        await addProject(formData);
+        const newProject = await addProject(formData);
 
         console.log("Listener submit actif");
+        console.log("Projet ajouté", newProject);
+
+        form.reset();
     })
 }
 
