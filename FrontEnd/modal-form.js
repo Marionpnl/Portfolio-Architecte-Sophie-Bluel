@@ -1,4 +1,5 @@
 import { addProject, getCategoriesForModalForm } from "./api.js";
+import { addProjectToGallery } from "./gallery.js";
 
 const form = document.querySelector(".form-photo");
 
@@ -17,6 +18,8 @@ function submittingAddForm () {
         console.log("Listener submit actif");
         console.log("Projet ajouté", newProject);
 
+        addProjectToGallery(newProject);
+        
         form.reset();
     })
 }

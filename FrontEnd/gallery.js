@@ -57,7 +57,6 @@ function filterProjects(projects) {
     })
 }
 
-
 // Gestion de l'affichage des travaux de la gallerie dans la modale
 function showProjectsInModal(projects) {
     const photosContainer = document.querySelector(".gallery-view .photos");
@@ -82,5 +81,24 @@ function showProjectsInModal(projects) {
         console.log("Projet ajouté dans la modale!", imageProject);
     }
 }
+
+// Affichage d'un nouveau projet (ajouté via la modale) dans la gallerie principale
+export function addProjectToGallery(project) {
+    const gallery = document.querySelector(".gallery");
+
+    const projectSheet = document.createElement("figure");
+
+    const projectImage = document.createElement("img");
+    projectImage.src = project.imageUrl;
+    projectImage.alt = project.title;
+
+    const projectTitle = document.createElement("figcaption");
+    projectTitle.innerText = project.title;
+
+    projectSheet.appendChild(projectImage);
+    projectSheet.appendChild(projectTitle);
+    gallery.appendChild(projectSheet);
+}
+
 
 export { showProjects, showCategories, showProjectsInModal };
