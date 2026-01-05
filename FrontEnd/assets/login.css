@@ -30,7 +30,8 @@ li a.active {
 fieldset input{
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	height: 50px;
+	padding: 16px 8px 16px 8px;
+    font-size: 14px;
 }
 
 #login input[type="submit"]{
