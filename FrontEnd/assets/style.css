@@ -166,6 +166,11 @@ nav a:hover {
 	cursor: pointer;
 }
 
+.filters button.active {
+	background-color: #1D6154;
+	color: white;
+}
+
 /* Gallery */
 .gallery {
 	width: 100%;

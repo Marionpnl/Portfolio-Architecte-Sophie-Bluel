@@ -13,85 +13,104 @@ const category = document.querySelector('select[name="category"]');
 
 // Fonction pour la prévisualisation de l'image 
 function previewImageOnChange() {
-    fileInput.addEventListener ("change", () => {
-        const file = fileInput.files[0];
-        console.log(file);
+    try {
+        fileInput.addEventListener ("change", () => {
+            const file = fileInput.files[0];
+            console.log(file);
 
-        const validTypes = ["image/jpeg", "image/png"];
-        if (!validTypes.includes(file.type)) {
-            alert ("Format invalide. JPG ou PNG uniquement");
-            fileInput.value = "";
-            changeButtonColorIfCompletedForm();
-            return;
-        }
+            const validTypes = ["image/jpeg", "image/png"];
+            if (!validTypes.includes(file.type)) {
+                alert ("Format invalide. JPG ou PNG uniquement");
+                fileInput.value = "";
+                changeButtonColorIfCompletedForm();
+                return;
+            }
             
-        if (file.size > 4 * 1024 * 1024) {
-            alert("Image trop lourde (4Mo max)");
-            fileInput.value = "";
+            if (file.size > 4 * 1024 * 1024) {
+                alert("Image trop lourde (4Mo max)");
+                fileInput.value = "";
+                changeButtonColorIfCompletedForm();
+                return;
+            }
+
+            previewImage.src = URL.createObjectURL(file);
+            addPhotoDiv.classList.add("has-preview");
+
             changeButtonColorIfCompletedForm();
-            return;
-        }
-
-        previewImage.src = URL.createObjectURL(file);
-        addPhotoDiv.classList.add("has-preview");
-
-        changeButtonColorIfCompletedForm();
-        });
+            });
+    } catch (error) {
+        console.error("Erreur dans previewImageOnChange:", error);
+    }
 }
 
 // Fonction pour changer la couleur du bouton si le formulaire est correctement rempli
 function changeButtonColorIfCompletedForm () {
-    if (title.value && category.value && fileInput.files.length > 0) {
-        submitBtn.classList.add("active"); // bouton vert
-        submitBtn.disabled = false;
-    } else {
-        submitBtn.classList.remove("active"); // bouton gris
-        submitBtn.disabled = true;
+    try {
+        if (title.value && category.value && fileInput.files.length > 0) {
+            submitBtn.classList.add("active"); // bouton vert
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.classList.remove("active"); // bouton gris
+            submitBtn.disabled = true;
+        }
+    } catch (error) {
+        console.error("Erreur dans changeButtonColorIfCompletedForm:", error);
     }
 }
 
 // Fonction pour gérer l'envoi du formulaire au clic sur le bouton "Valider"
 function submittingAddForm () {
-    form.addEventListener ("submit", async (event) => {
-        event.preventDefault();
+    try {
+        form.addEventListener ("submit", async (event) => {
+            event.preventDefault();
         
-        if (!fileInput.files.length || !title.value || !category.value) {
-            alert("Veuillez remplir tous les champs !");
-            return;
-        }
+            if (!fileInput.files.length || !title.value || !category.value) {
+                alert("Veuillez remplir tous les champs !");
+                return;
+            }
 
-        const formData = new FormData(form);
+            const formData = new FormData(form);
 
-        for (let [key, value] of formData.entries()) {
-            console.log(key, value);
-        }
+            for (let [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+            try {
+                const newProject = await addProject(formData);
 
-        const newProject = await addProject(formData);
+                console.log("Listener submit actif");
+                console.log("Projet ajouté", newProject);
+                alert("Projet ajouté avec succès !");
 
-        console.log("Listener submit actif");
-        console.log("Projet ajouté", newProject);
-        alert("Projet ajouté avec succès !");
+                addProjectToGallery(newProject);
 
-        addProjectToGallery(newProject);
-
-        form.reset();
-        previewImage.src = "";
-        addPhotoDiv.classList.remove("has-preview");
-    })
+                form.reset();
+                previewImage.src = "";
+                addPhotoDiv.classList.remove("has-preview");
+            } catch (error) {
+                console.error("Erreur lors de l'ajout du projet:", error);
+            }
+        });
+    } catch (error) {
+        console.error("Erreur dans submittingAddForm:", error);
+    }
 }
 
 // 
 function initModalForm () {
-    getCategoriesForModalForm();
+    try {
+        getCategoriesForModalForm();
     
-    previewImageOnChange();
+        previewImageOnChange();
 
-    submittingAddForm();
+        submittingAddForm();
 
-    title.addEventListener("input", changeButtonColorIfCompletedForm);
-    category.addEventListener("change", changeButtonColorIfCompletedForm);
+        title.addEventListener("input", changeButtonColorIfCompletedForm);
+        category.addEventListener("change", changeButtonColorIfCompletedForm);
     
-    changeButtonColorIfCompletedForm();
+        changeButtonColorIfCompletedForm();
+    } catch (error) {
+        console.error("Erreur dans initModalForm:", error);
+    }
 }
 
 export { initModalForm };
