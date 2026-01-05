@@ -1,4 +1,5 @@
-import { showProjects, showCategories, showProjectsInModal } from './gallery.js';
+import { showProjects, showCategories } from './gallery.js';
+import { showProjectsInModal } from './modal-gallery.js';
 
 let projects = []; // Tableau pour stocker les projets récupérés
 let categories = []; // Tableau pour stocker les catégories récupérées

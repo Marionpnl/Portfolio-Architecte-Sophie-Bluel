@@ -55,8 +55,10 @@ function addModifyButton() {
 
 // Gestion de la déconnexion de l'utilisateur
 function disconnectUser() {
-    const loginElement = document.querySelector(".login");
-    loginElement.addEventListener("click", () => {
+    const loginElement = document.querySelector(".login a");
+    loginElement.addEventListener("click", (event) => {
+        event.preventDefault();
+
         window.localStorage.removeItem("authToken");
         window.location.href = "index.html";
     })

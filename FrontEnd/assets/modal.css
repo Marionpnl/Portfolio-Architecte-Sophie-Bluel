@@ -133,6 +133,7 @@
 .add-photo i {
     background-color: #E8F1F6;
     color: #B9C5CC;
+    display: inline-block;
     font-size: 76px;
     width: 76px;
 }

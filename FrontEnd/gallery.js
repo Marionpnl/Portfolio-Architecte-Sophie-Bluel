@@ -57,31 +57,6 @@ function filterProjects(projects) {
     })
 }
 
-// Gestion de l'affichage des travaux de la gallerie dans la modale
-function showProjectsInModal(projects) {
-    const photosContainer = document.querySelector(".gallery-view .photos");
-    photosContainer.innerHTML = ""; // Vider le conteneur avant d'ajouter les projets
-
-    for (let i = 0; i < projects.length; i++) {
-        const imageSheet = document.createElement("figure");
-
-        const imageProject = document.createElement("img");
-        imageProject.src = projects[i].imageUrl;
-        imageProject.alt = projects[i].title;
-        imageProject.dataset.id = projects[i].id;
-
-        const trashIcon = document.createElement("i");
-        trashIcon.classList.add("fa-solid", "fa-trash-can");
-        trashIcon.dataset.id = projects[i].id;
-
-        imageSheet.appendChild(imageProject);
-        imageSheet.appendChild(trashIcon);
-        photosContainer.appendChild(imageSheet);
-
-        console.log("Projet ajouté dans la modale!", imageProject);
-    }
-}
-
 // Affichage d'un nouveau projet (ajouté via la modale) dans la gallerie principale
 export function addProjectToGallery(project) {
     const gallery = document.querySelector(".gallery");
@@ -101,4 +76,4 @@ export function addProjectToGallery(project) {
 }
 
 
-export { showProjects, showCategories, showProjectsInModal };
+export { showProjects, showCategories };
