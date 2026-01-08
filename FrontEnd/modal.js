@@ -46,7 +46,6 @@ function openModal (view) {
 function backToGalleryView() {
     try {
         backButton.addEventListener("click", () => {
-            console.log("clic sur le bouton retour");
 
             galleryModal.style.display = "flex";
             formModal.style.display = "none";
@@ -107,12 +106,10 @@ export function initModal() {
         const closeModalButton = document.querySelector(".close-modal");
         // Ajout des écouteurs d'événements pour l'ouverture des modales
         modifyButton.addEventListener("click", () => {
-            console.log("clic sur le bouton modifier");
             openModal("gallery");
         });
 
         addPhotoButton.addEventListener("click", () => {
-            console.log("clic sur le bouton ajouter une photo");
             openModal("form");
         });
 

@@ -61,7 +61,6 @@ async function deleteProjects (id){
         if (!response.ok){
             throw new Error ("Echec de la suppression, erreur API");
         }
-        console.log("Projet supprimé côté API");
     } catch (error) {
         console.error("Erreur dans deleteProjects:", error);
     }
@@ -106,7 +105,6 @@ async function getCategoriesForModalForm () {
             select.appendChild(option);
         });
 
-        console.log("Catégories récupérées dans le select")
     } catch (error) {
         console.error("Erreur dans getCategoriesForModalForm:", error);
     }

@@ -77,7 +77,6 @@ function submittingAddForm () {
             try {
                 const newProject = await addProject(formData);
 
-                console.log("Listener submit actif");
                 console.log("Projet ajouté", newProject);
                 alert("Projet ajouté avec succès !");
 
